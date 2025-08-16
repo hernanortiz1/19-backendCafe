@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { crearProductos, leerProductos, test } from "../controllers/productos.controllers.js";
 
+/*TODOS LOS ARCHIVOS DE RUTAS SOLO DEBEN TENER informacion
+
+*/
 //enrutador
 const router = Router()
 
