@@ -9,13 +9,13 @@ export const test = (req, res,)=>{
 puedo tener uno o mas archivos que tienen la logica 
 del backend */
 export const leerProductos = (req, res)=>{
-
+    
 }
 
 export const crearProductos = async (req, res) =>{
     try {
         //recibir obj que tengo que agregagr a BD
-        console.log(req.body)
+
     //validar datos del obj
 
     //guardar obj en BD
