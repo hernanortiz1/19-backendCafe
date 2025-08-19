@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { crearProductos, leerProductos, leerProductosPorId, test } from "../controllers/productos.controllers.js";
+import { borrarProductoPorId, crearProductos, leerProductos, leerProductosPorId, test } from "../controllers/productos.controllers.js";
 
 /*TODOS LOS ARCHIVOS DE RUTAS SOLO DEBEN TENER informacion
 
@@ -13,6 +13,6 @@ router.route("/test").get(test)
 //get post put delete
 router.route("/").get(leerProductos).post(crearProductos)
 //si le agrego : es un parametro
-router.route("/:id").get(leerProductosPorId)
+router.route("/:id").get(leerProductosPorId).delete(borrarProductoPorId)
 
 export default router;
