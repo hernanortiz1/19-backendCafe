@@ -8,8 +8,33 @@ export const test = (req, res,)=>{
 /*
 puedo tener uno o mas archivos que tienen la logica 
 del backend */
-export const leerProductos = (req, res)=>{
-    
+export const leerProductos = async(req, res)=>{
+    try {
+        //buscar todos los prod en BD
+const listaProductos = await Producto.find({})
+        //enviar respuesta al front
+        res.status(200).json(listaProductos)
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({mensaje: "Error  al leer un producto"})
+    }
+}
+
+export const leerProductosPorId = async(req, res)=>{
+    try {
+        //obtener el parametro del req
+        //pedir a mongoose que encuentre el prod
+        const productoBuscado = await Producto.findById(req.params.id)
+        if(!productoBuscado){
+            return res.status(404).json({mensaje: "Producto no encontrado"})
+        }
+        //constestar el front
+        res.status(200).json(productoBuscado)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({mensaje: "Error al obtener el producto"})
+    }
 }
 
 export const crearProductos = async (req, res) =>{
