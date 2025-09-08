@@ -1,3 +1,4 @@
+import generarJWT from "../helpers/generarJWT.js";
 import Usuario from "../models/usuario.js";
 import bcrypt from "bcrypt";
 
@@ -58,9 +59,16 @@ export const login = async (req, res) => {
     }
 
     //generar token
-
+    const token = await generarJWT(
+      usuarioExistente.nombreUsuario,
+      usuarioExistente.email
+    );
     //enviar respuesta a front
-    res.status(200).json({mensaje: "login exitoso", nombreUsuario: usuarioExistente.nombreUsuario})
+    res.status(200).json({
+      mensaje: "login exitoso",
+      nombreUsuario: usuarioExistente.nombreUsuario,
+      token,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ mensaje: "Error al loguear el usuario" });
