@@ -43,7 +43,7 @@ export const borrarProductoPorId = async (req, res) => {
       return res.status(404).json({ mensaje: "Producto no encontrado" });
     }
     //responder front
-    res.status(200).json({mensaje: "Producto eliminado con exito"});
+    res.status(200).json({ mensaje: "Producto eliminado con exito" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ mensaje: "Error al eliminar el producto" });
@@ -53,18 +53,20 @@ export const borrarProductoPorId = async (req, res) => {
 export const editarProductoPorId = async (req, res) => {
   try {
     //buscar el prod por id y luego eliminar
-    const productoModificado = await Producto.findByIdAndUpdate(req.params.id, req.body);
+    const productoModificado = await Producto.findByIdAndUpdate(
+      req.params.id,
+      req.body
+    );
     if (!productoModificado) {
       return res.status(404).json({ mensaje: "Producto no encontrado" });
     }
     //responder front
-    res.status(200).json({mensaje: "Producto modificado con exito"});
+    res.status(200).json({ mensaje: "Producto modificado con exito" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ mensaje: "Error al modificar el producto" });
   }
 };
-
 
 export const crearProductos = async (req, res) => {
   try {
