@@ -84,3 +84,26 @@ export const crearProductos = async (req, res) => {
     res.status(500).json({ mensaje: "Error al crear el producto" });
   }
 };
+
+export const productosPaginados = async(req,res)=>{
+ try {
+    const page = parseInt(req.query.page) || 1; //numero de pagina
+    const limit = parseInt(req.query.limit) || 10; //limit es la cantidad de productos que quieres mostrar por página.
+    const skip = (page - 1) * limit; //la fórmula (page - 1) * limit te da el número de productos que debes omitir (skip) para empezar en la página correcta.
+   
+    const [productos, total] = await Promise.all([
+      Producto.find().skip(skip).limit(limit), //obtiene los productos de la página solicitada.
+      Producto.countDocuments(), //cuenta el total de productos en la colección.
+    ]);
+  
+    res.status(200).json({
+      productos,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener productos paginados" });
+  }
+}
